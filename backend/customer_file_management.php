@@ -4,7 +4,7 @@ include("../backend/db.php");
 
 // Ensure only customers can access
 if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'customer') {
-    header("Location: login.html");
+  header("Location: login.php");
     exit();
 }
 

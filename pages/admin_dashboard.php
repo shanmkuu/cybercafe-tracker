@@ -408,13 +408,13 @@
             // Check authentication
             const currentUser = localStorage.getItem('currentUser');
             if (!currentUser) {
-                window.location.href = 'login.html';
+                window.location.href = 'login.php';
                 return;
             }
 
             const user = JSON.parse(currentUser);
             if (user.role !== 'admin') {
-                window.location.href = 'login.html';
+                window.location.href = 'login.php';
                 return;
             }
 
@@ -715,7 +715,7 @@
                 'Are you sure you want to logout? You will be redirected to the login page.',
                 () => {
                     localStorage.removeItem('currentUser');
-                    window.location.href = 'login.html';
+                    window.location.href = 'login.php';
                 }
             );
         });

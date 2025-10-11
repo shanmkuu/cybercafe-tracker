@@ -225,7 +225,7 @@
         window.addEventListener('load', function() {
             // Check authentication
             if (!currentUser.username || currentUser.role !== 'customer') {
-                window.location.href = 'login.html';
+                window.location.href = 'login.php';
                 return;
             }
 
@@ -500,7 +500,7 @@
             localStorage.removeItem('currentUser');
             
             // Redirect to login
-            window.location.href = 'login.html';
+            window.location.href = 'login.php';
         });
 
         // Close modal on outside click

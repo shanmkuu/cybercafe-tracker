@@ -17,9 +17,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             $_SESSION["role"] = $user["role"];
 
             if ($user["role"] === "admin") {
-                header("Location: ../pages/admin_dashboard.html");
+                header("Location: ../pages/admin_dashboard.php");
             } else {
-                header("Location: ../pages/customer_file_management.html");
+                header("Location: ../pages/customer_file_management.php");
             }
             exit();
         } else {
