@@ -1,3 +1,7 @@
+<?php
+session_start();
+$error = $_GET['error'] ?? '';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,17 +10,12 @@
     <title>CyberCafe Tracker - Secure Login</title>
     <link rel="stylesheet" href="../css/main.css" />
     <link rel="icon" type="image/x-icon" href="https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" />
-<script type="module" src="https://static.rocket.new/rocket-web.js?_cfg=https%3A%2F%2Fcybercafe1027back.builtwithrocket.new&_be=https%3A%2F%2Fapplication.rocket.new&_v=0.1.8"></script>
 </head>
 <body class="min-h-screen bg-background flex items-center justify-center p-4">
-    <!-- Background Pattern -->
     <div class="absolute inset-0 opacity-5">
         <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25px 25px, #2563EB 2px, transparent 0), radial-gradient(circle at 75px 75px, #0EA5E9 2px, transparent 0); background-size: 100px 100px;"></div>
     </div>
-
-    <!-- Main Login Container -->
     <div class="relative w-full max-w-md">
-        <!-- Security Badge -->
         <div class="flex justify-center mb-6">
             <div class="flex items-center space-x-2 bg-success-100 text-success px-3 py-1 rounded-full text-sm font-medium">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -25,10 +24,7 @@
                 <span>SSL Secured</span>
             </div>
         </div>
-
-        <!-- Login Card -->
         <div class="card p-8 shadow-modal">
-            <!-- Header -->
             <div class="text-center mb-8">
                 <div class="flex justify-center mb-4">
                     <div class="w-16 h-16 bg-primary-100 rounded-xl flex items-center justify-center">
@@ -40,10 +36,7 @@
                 <h1 class="text-2xl font-semibold text-text-primary mb-2">CyberCafe Tracker</h1>
                 <p class="text-secondary-500">Secure access to your session management</p>
             </div>
-
-            <!-- Login Form -->
-            <form id="loginForm" class="space-y-6">
-                <!-- Username Field -->
+            <form class="space-y-6" method="POST" action="../backend/login.php">
                 <div>
                     <label for="username" class="block text-sm font-medium text-text-primary mb-2">
                         Username
@@ -56,40 +49,28 @@
                             </svg>
                         </div>
                     </div>
-                    <div id="usernameError" class="hidden mt-1 text-sm text-error"></div>
                 </div>
-
-                <!-- Password Field -->
                 <div>
                     <label for="password" class="block text-sm font-medium text-text-primary mb-2">
                         Password
                     </label>
                     <div class="relative">
                         <input type="password" id="password" name="password" required class="w-full px-4 py-3 border border-subtle rounded-lg focus:ring-2 focus:ring-primary focus:border-primary transition-all duration-200 bg-surface pr-12" placeholder="Enter your password" />
-                        <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center">
+                        <button type="button" id="togglePassword" class="absolute inset-y-0 right-0 pr-3 flex items-center" tabindex="-1">
                             <svg id="eyeIcon" class="w-5 h-5 text-secondary-400 hover:text-secondary-600 transition-colors" fill="currentColor" viewBox="0 0 20 20">
                                 <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>
                                 <path fill-rule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clip-rule="evenodd"/>
                             </svg>
                         </button>
                     </div>
-                    <div id="passwordError" class="hidden mt-1 text-sm text-error"></div>
                 </div>
-
-                <!-- Error Message -->
-                <div id="loginError" class="hidden p-3 bg-error-100 border border-error text-error rounded-lg text-sm"></div>
-
-                <!-- Login Button -->
-                <button type="submit" id="loginButton" class="w-full btn-primary py-3 px-4 rounded-lg font-medium text-white transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
-                    <span id="loginButtonText">Sign In</span>
-                    <svg id="loginSpinner" class="hidden animate-spin -mr-1 ml-3 h-5 w-5 text-white" fill="none" viewBox="0 0 24 24">
-                        <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"/>
-                        <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"/>
-                    </svg>
+                <?php if ($error): ?>
+                    <div class="p-3 bg-error-100 border border-error text-error rounded-lg text-sm"><?php echo htmlspecialchars($error); ?></div>
+                <?php endif; ?>
+                <button type="submit" class="w-full btn-primary py-3 px-4 rounded-lg font-medium text-white transition-all duration-200 hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed">
+                    <span>Sign In</span>
                 </button>
             </form>
-
-            <!-- Demo Credentials -->
             <div class="mt-8 p-4 bg-secondary-100 rounded-lg">
                 <h3 class="text-sm font-medium text-text-primary mb-3">Demo Credentials</h3>
                 <div class="space-y-2 text-sm">
@@ -104,8 +85,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- Trust Signals -->
         <div class="flex justify-center items-center space-x-6 mt-6 text-sm text-secondary-500">
             <div class="flex items-center space-x-1">
                 <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
@@ -126,38 +105,18 @@
                 <span>Verified</span>
             </div>
         </div>
-
-        <!-- Footer -->
         <div class="text-center mt-8 text-xs text-secondary-400">
             © 2025 CyberCafe Tracker. All Rights Reserved.
         </div>
     </div>
-
     <script>
-        // Mock user database
-        const users = {
-            'admin': { password: 'admin123', role: 'admin' },
-            'customer': { password: 'customer123', role: 'customer' }
-        };
-
-        // DOM elements
-        const loginForm = document.getElementById('loginForm');
-        const usernameInput = document.getElementById('username');
-        const passwordInput = document.getElementById('password');
-        const loginButton = document.getElementById('loginButton');
-        const loginButtonText = document.getElementById('loginButtonText');
-        const loginSpinner = document.getElementById('loginSpinner');
-        const loginError = document.getElementById('loginError');
-        const usernameError = document.getElementById('usernameError');
-        const passwordError = document.getElementById('passwordError');
-        const togglePassword = document.getElementById('togglePassword');
-        const eyeIcon = document.getElementById('eyeIcon');
-
         // Password visibility toggle
-        togglePassword.addEventListener('click', function() {
+        document.getElementById('togglePassword').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            const eyeIcon = document.getElementById('eyeIcon');
             const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
             passwordInput.setAttribute('type', type);
-            
+
             if (type === 'text') {
                 eyeIcon.innerHTML = `
                     <path d="M3.707 2.293a1 1 0 00-1.414 1.414l14 14a1 1 0 001.414-1.414l-1.473-1.473A10.014 10.014 0 0019.542 10C18.268 5.943 14.478 3 10 3a9.958 9.958 0 00-4.512 1.074l-1.78-1.781zm4.261 4.26l1.514 1.515a2.003 2.003 0 012.45 2.45l1.514 1.514a4 4 0 00-5.478-5.478z"/>
@@ -170,112 +129,6 @@
                 `;
             }
         });
-
-        // Clear errors on input
-        usernameInput.addEventListener('input', clearErrors);
-        passwordInput.addEventListener('input', clearErrors);
-
-        function clearErrors() {
-            loginError.classList.add('hidden');
-            usernameError.classList.add('hidden');
-            passwordError.classList.add('hidden');
-            usernameInput.classList.remove('border-error');
-            passwordInput.classList.remove('border-error');
-        }
-
-        function showError(message, field = null) {
-            if (field === 'username') {
-                usernameError.textContent = message;
-                usernameError.classList.remove('hidden');
-                usernameInput.classList.add('border-error');
-            } else if (field === 'password') {
-                passwordError.textContent = message;
-                passwordError.classList.remove('hidden');
-                passwordInput.classList.add('border-error');
-            } else {
-                loginError.textContent = message;
-                loginError.classList.remove('hidden');
-            }
-        }
-
-        function setLoading(loading) {
-            loginButton.disabled = loading;
-            if (loading) {
-                loginButtonText.textContent = 'Signing In...';
-                loginSpinner.classList.remove('hidden');
-            } else {
-                loginButtonText.textContent = 'Sign In';
-                loginSpinner.classList.add('hidden');
-            }
-        }
-
-        // Form submission
-        loginForm.addEventListener('submit', async function(e) {
-            e.preventDefault();
-            clearErrors();
-
-            const username = usernameInput.value.trim();
-            const password = passwordInput.value;
-
-            // Validation
-            if (!username) {
-                showError('Username is required', 'username');
-                return;
-            }
-
-            if (!password) {
-                showError('Password is required', 'password');
-                return;
-            }
-
-            setLoading(true);
-
-            // Simulate API call delay
-            setTimeout(() => {
-                // Check credentials
-                const user = users[username];
-                
-                if (!user) {
-                    showError('Invalid username or password');
-                    setLoading(false);
-                    return;
-                }
-
-                if (user.password !== password) {
-                    showError('Invalid username or password');
-                    setLoading(false);
-                    return;
-                }
-
-                // Store user session
-                localStorage.setItem('currentUser', JSON.stringify({
-                    username: username,
-                    role: user.role,
-                    loginTime: new Date().toISOString()
-                }));
-
-                // Redirect based on role
-                if (user.role === 'admin') {
-                    window.location.href = 'admin_dashboard.php';
-                } else {
-                    window.location.href = 'customer_file_management.php';
-                }
-            }, 1500);
-        });
-
-        // Check if user is already logged in
-        window.addEventListener('load', function() {
-            const currentUser = localStorage.getItem('currentUser');
-            if (currentUser) {
-                const user = JSON.parse(currentUser);
-                if (user.role === 'admin') {
-                    window.location.href = 'admin_dashboard.php';
-                } else {
-                    window.location.href = 'customer_file_management.php';
-                }
-            }
-        });
     </script>
-<script id="dhws-dataInjector" src="../public/dhws-data-injector.js"></script>
 </body>
 </html>

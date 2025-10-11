@@ -9,7 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $sql = "SELECT * FROM users WHERE username='$username' LIMIT 1";
     $result = $conn->query($sql);
 
-    if ($result->num_rows === 1) {
+    if ($result && $result->num_rows === 1) {
         $user = $result->fetch_assoc();
         if (password_verify($password, $user["password_hash"])) {
             $_SESSION["user_id"] = $user["user_id"];
@@ -23,10 +23,15 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             }
             exit();
         } else {
-            echo "Invalid password.";
+            header("Location: ../pages/login.php?error=Invalid+password");
+            exit();
         }
     } else {
-        echo "User not found.";
+        header("Location: ../pages/login.php?error=User+not+found");
+        exit();
     }
+} else {
+    header("Location: ../pages/login.php");
+    exit();
 }
 ?>
