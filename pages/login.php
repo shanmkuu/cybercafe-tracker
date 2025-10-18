@@ -71,19 +71,6 @@ $error = $_GET['error'] ?? '';
                     <span>Sign In</span>
                 </button>
             </form>
-            <div class="mt-8 p-4 bg-secondary-100 rounded-lg">
-                <h3 class="text-sm font-medium text-text-primary mb-3">Demo Credentials</h3>
-                <div class="space-y-2 text-sm">
-                    <div class="flex justify-between items-center">
-                        <span class="text-secondary-600">Administrator:</span>
-                        <code class="font-data text-xs bg-surface px-2 py-1 rounded">admin / admin123</code>
-                    </div>
-                    <div class="flex justify-between items-center">
-                        <span class="text-secondary-600">Customer:</span>
-                        <code class="font-data text-xs bg-surface px-2 py-1 rounded">customer / customer123</code>
-                    </div>
-                </div>
-            </div>
         </div>
         <div class="flex justify-center items-center space-x-6 mt-6 text-sm text-secondary-500">
             <div class="flex items-center space-x-1">

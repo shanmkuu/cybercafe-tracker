@@ -4,7 +4,7 @@ include("db.php");
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $username = $conn->real_escape_string($_POST["username"]);
-    $password = $_POST["password"];
+    $password = $_GET["password"];
 
     $sql = "SELECT * FROM users WHERE username='$username' LIMIT 1";
     $result = $conn->query($sql);
@@ -30,8 +30,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
         header("Location: ../pages/login.php?error=User+not+found");
         exit();
     }
-} else {
-    header("Location: ../pages/login.php");
+}
+// If GET, show a message or redirect to the login form
+if ($_SERVER["REQUEST_METHOD"] !== "POST") {
+    echo "<script>window.location.href='../pages/login.php';</script>";
     exit();
 }
 ?>
